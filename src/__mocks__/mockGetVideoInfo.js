@@ -1,4 +1,4 @@
-module.exports = {
+export const dataVideoInfo = {
   "kind": "youtube#videoListResponse",
   "etag": "Z8WVHYq2f5pDI7ljw2Xg8V2XvDo",
   "items": [

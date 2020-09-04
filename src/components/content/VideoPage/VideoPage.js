@@ -5,6 +5,8 @@ import VideoPlayerInfo from './VideoPlayer/VideoPlayerInfo';
 import VideoPlayerComments from './VideoPlayerComments/VideoPlayerComments';
 import VideoSideBar from './VideoSideBar/VideoSideBar';
 import { getVideoInfo, getVideoComments } from './../../../api/service';
+import { dataVideoInfo } from '../../../__mocks__/mockGetVideoInfo';
+import { dataVideoComments } from '../../../__mocks__/mockGetVideoComments';
 
 class VideoPage extends Component {
   constructor(props) {
@@ -21,20 +23,23 @@ class VideoPage extends Component {
   }
 
   componentDidMount() {
-    getVideoInfo(this.state.videoId)
-      .then((data) => this.setState({ videoInfo: data.items[0] }));
+    this.setState({ videoInfo: dataVideoInfo.items[0] });
+    this.setState({ videoComments: dataVideoComments.items });
+    // getVideoInfo(this.state.videoId)
+    //   .then((data) => this.setState({ videoInfo: data.items[0] }));
 
-    getVideoComments(this.state.videoId)
-      .then((data) => this.setState({ videoComments: data.items }));
+    // getVideoComments(this.state.videoId)
+    //   .then((data) => this.setState({ videoComments: data.items }));
   }
 
   handleSelectedVideo(videoId) {
     this.setState({ videoId: videoId })
-    getVideoInfo(this.state.videoId)
-      .then((data) => this.setState({ videoInfo: data.items[0] }));
-
-    getVideoComments(this.state.videoId)
-      .then((data) => this.setState({ videoComments: data.items }));
+    this.setState({ videoInfo: dataVideoInfo.items[0] });
+    this.setState({ videoComments: dataVideoComments.items });
+    // getVideoInfo(this.state.videoId)
+    //   .then((data) => this.setState({ videoInfo: data.items[0] }));
+    // getVideoComments(this.state.videoId)
+    //   .then((data) => this.setState({ videoComments: data.items }));
     this.props.history.push(`/watch/${videoId}`);
   }
 

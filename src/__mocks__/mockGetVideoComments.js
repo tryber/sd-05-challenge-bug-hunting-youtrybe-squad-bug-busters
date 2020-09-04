@@ -1,4 +1,4 @@
-module.exports = {
+export const dataVideoComments = {
   "kind": "youtube#commentThreadListResponse",
   "etag": "z3-MX1wWsTYOxo4RaEMF4wXCdb4",
   "pageInfo": {
