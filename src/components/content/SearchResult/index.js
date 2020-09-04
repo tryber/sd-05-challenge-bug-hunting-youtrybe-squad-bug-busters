@@ -20,24 +20,27 @@ class SearchResult extends Component {
       params: { searchParam },
     } = this.props.match;
 
-    searchVideos(searchParam).then((data) => {
-      this.setState({ data: data.items });
-    }).catch(error => this.setState({error: error}))
+    // Bug na requisição da API
+    searchVideos(searchParam).then(({ items }) => {
+      this.setState({ data: items });
+    });
   }
 
   render() {
     const { data } = this.state;
-
-    if (data.length < 1) return (<div>Loading...</div>)
-
+    if (data.length < 0) return (<div>Loading...</div>)
     return (
       <div>
-        {data.map((item) => (
-          <Link className="thumbnail-card" key={item.etag} to={{
-            pathname: `/watch/${item.id.videoId}`,
-            state: { data: data }
-          }}><VideoCard video={item} /></Link>
-        ))}
+        {
+          data
+            .filter((el, index) => index > 0)
+            .map((item) => (
+              <Link className="thumbnail-card" key={item.etag} to={{
+                pathname: `/watch/${item.id.videoId}`,
+                state: { data: data }
+              }}><VideoCard video={item} /></Link>
+            ))
+        }
       </div>
     );
   }
