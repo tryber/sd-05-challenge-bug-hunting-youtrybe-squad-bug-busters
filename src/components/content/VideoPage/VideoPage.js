@@ -4,15 +4,19 @@ import VideoPlayerDescription from './VideoPlayer/VideoPlayerDescription';
 import VideoPlayerInfo from './VideoPlayer/VideoPlayerInfo';
 import VideoPlayerComments from './VideoPlayerComments/VideoPlayerComments';
 import VideoSideBar from './VideoSideBar/VideoSideBar';
-import { getVideoInfo, getVideoComments } from './../../../api/service';
+import { withRouter } from 'react-router-dom';
+import {
+  getVideoInfo,
+  getVideoComments,
+} from './../../../api/service';
 
 class VideoPage extends Component {
   constructor(props) {
     super(props);
-
+    
     this.state = {
       videoId: this.props.match.params.videoId,
-      relatedVideos: this.props.location.state.data,
+      relatedVideos: this.props.location.state.data || [],
       videoInfo: null,
       videoComments: null,
     };
@@ -22,7 +26,9 @@ class VideoPage extends Component {
 
   componentDidMount() {
     getVideoInfo(this.state.videoId)
-      .then((data) => this.setState({ videoInfo: data.items[0] }));
+      .then((data) => {
+        this.setState({ videoInfo: data.items[0] })
+      });
 
     getVideoComments(this.state.videoId)
       .then((data) => this.setState({ videoComments: data.items }));
@@ -68,4 +74,4 @@ class VideoPage extends Component {
   }
 }
 
-export default VideoPage;
+export default withRouter(VideoPage);

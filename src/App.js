@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Switch, Route, Router } from 'react-router-dom';
+
+// Change "Router" to "BrowserRouter as Router"
+import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 
 import './App.css';
 import './css/mainContents.css';
@@ -17,7 +19,7 @@ class App extends Component {
         <div className="App">
           <Header />
           <Switch>
-            <Route path="/"><InitialPage /></Route>
+            <Route exact path="/"><InitialPage /></Route>
             <Route
               exact path="/watch/:videoId"
               render={(props) => <VideoPage {...props} />}

@@ -10,9 +10,10 @@ class VideoSideBar extends Component {
     return (
       <Fragment>
         {relatedVideos.map((video) => (
-          <Fragment key={video.id.videoId} >
+          <Fragment key={`${video.id.videoId}-${Math.random() * 1E9}`} >
             <div
               className="suggested-video"
+              data-testid="selectedVideo"
               onClick={() => handleSelectedVideo(video.id.videoId)}
             >
               <VideoThumbNail
