@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import '../../../css/sideBar.css';
 import { searchVideos } from '../../../api/service';
+// import { dataSearchVideo } from '../../../__mocks__/mockSearchVideo';
 
 class SearchResult extends Component {
   constructor(props) {
@@ -16,11 +17,15 @@ class SearchResult extends Component {
   }
 
   componentDidMount() {
+    // const vidsWithoutChannel = dataSearchVideo.items
+    //   .filter((item) => item.id.kind === "youtube#video");
+    // this.setState({ data: vidsWithoutChannel });
     const {
       params: { searchParam },
     } = this.props.match;
 
     searchVideos(searchParam).then((data) => {
+      console.log(data.items);
       this.setState({ data: data.items });
     }).catch(error => this.setState({error: error}))
   }

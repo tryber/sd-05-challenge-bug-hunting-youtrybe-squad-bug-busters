@@ -1,4 +1,4 @@
-module.exports = {
+export const dataSearchVideo = {
   "kind": "youtube#searchListResponse",
   "etag": "Wiioha553aUutwAGJG1zb0H1MhM",
   "nextPageToken": "CBkQAA",
